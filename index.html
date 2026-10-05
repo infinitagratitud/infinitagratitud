@@ -245,6 +245,18 @@ footer{background:var(--plum);padding:72px 0 40px}
 </div>
 
 <script>
+/* ===== Al abrir la web, empezar siempre desde el inicio ===== */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+function irAlInicio(){
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  document.documentElement.style.scrollBehavior = 'auto';
+  window.scrollTo(0, 0);
+  document.documentElement.style.scrollBehavior = '';
+}
+irAlInicio();
+window.addEventListener('load', irAlInicio);
+window.addEventListener('pageshow', e => { if (e.persisted) irAlInicio(); });
+
 /* ===== Ajustes fáciles de cambiar ===== */
 const WHATSAPP = '34646825161';   // tu número, sin "+" ni espacios
 const MOSTRAR_PRECIOS = true;     // poné false para ocultar los precios
